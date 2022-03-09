@@ -1,0 +1,108 @@
+<div class="divMargenes p-col-2">
+    <button pButton type="button" id="btnAniadir"  icon="pi pi-plus" label="{{'AniadirUsuario' | translate}}" id="btnAniadir"
+        class="ui-button-raised ui-button-primary" (click)="add()"></button>
+</div>
+<div>
+    <p-table #dt1 [columns]="cols" [value]="usuarios" [paginator]="true" [rows]="10" dataKey="codUsuario"
+        [resizableColumns]="true" [reorderableColumns]="true" stateStorage="session" stateKey="statedemo-session">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="width:12em !important">{{'Acciones' | translate}}</th>
+            </tr>
+            <tr [style.fontSize.px]="fontSize">
+                <th>
+                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'codUsuario', 'contains')" placeholder="Filtra por Código usuario" class="ui-column-filter">
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td style="text-align:center">
+                    <p-button type="button" icon="pi pi-user" styleClass="ui-button-raised ui-button-primary"
+                        (click)="editar(rowData.codUsuario, true)" title="{{'listado.consultar' | translate}}"></p-button>
+                    <p-button type="button" icon="pi pi-trash" styleClass="ui-button-raised ui-button-primary"
+                        (click)="delete(rowData.codUsuario)" title="{{'listado.eliminar' | translate}}"></p-button>
+                    <p-button type="button" icon="pi pi-user-edit" styleClass="ui-button-raised ui-button-primary"
+                        (click)="editar(rowData.codUsuario, false)" title="{{'listado.editar' | translate}}"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog #cd header="{{'usuario.eliminarUsuario' | translate}}" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
+            label="{{'alertas.siConfirmacion' | translate}}" (click)="cd.accept()"></p-button>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-times"
+            label="{{'alertas.noConfirmacion' | translate}}" (click)="cd.reject()"></p-button>
+    </p-footer>
+</p-confirmDialog>
+<p-dialog header="{{ titleUserHeader }}" [(visible)]="displayDialog" [responsive]="true"
+    showEffect="fade" [modal]="true" [style]="{width: '500px'}">
+    <div class="ui-g ui-fluid" *ngIf="usuariosEdit">
+        <form [formGroup]="formulario" *ngIf="displayDialog">
+            <div class="p-col-12 p-grid p-justify-center">
+                <div class="p-col-6">
+                    <div class="ui-inputgroup" style="align-self: auto; margin-top: 1.25rem;">
+                        <span class="ui-float-label" style="width:100%">
+                            <input formControlName="numDoc" pInputText id="numDoc"/>
+                            <label for="numDoc">{{ 'Documento' | translate}}</label>
+                        </span>
+                        <button pButton type="button" icon="pi pi-search" class="ui-button-raised ui-button-primary" (click)="getDatosDicodef()" [disabled]="lupa"></button>
+                    </div>
+                </div>
+                <div class="p-col-6">
+                    <label for="codUsuario">{{ 'usuario.codigoUsuario' | translate}}</label>
+                    <input formControlName="codUsuario" pInputText id="codUsuario" />
+                </div>
+                <div class="p-col-12">
+                    <label for="nombreUsuario">{{ 'usuario.nombre' | translate}}</label>
+                    <input formControlName="nombreUsuario" pInputText id="nombreUsuario" />
+                </div>
+                <div class="p-col-12">
+                    <label for="primerApellido">{{ 'usuario.primerApellido' | translate}}</label>
+                    <input formControlName="primerApellido" pInputText id="primerApellido" />
+                </div>
+                <div class="p-col-12">
+                    <label for="segundoApellido">{{ 'usuario.segundoApellido' | translate}}</label>
+                    <input formControlName="segundoApellido" pInputText id="segundoApellido" />
+                </div>
+                <div class="p-col-12">
+                    <label for="grupo">{{ 'listado.roles' | translate }} *</label>
+                    <p-multiSelect [options]="rolesOptions" (onChange)="changeRoles()" formControlName="grupos" name="grupo" [(ngModel)]="rolesSelecionados" defaultLabel="Selecciona roles" selectedItemsLabel="{0} roles seleccionados"></p-multiSelect>
+                </div>
+                <div class="p-col-12">
+                    <label for="cGestion">{{ 'usuario.centroGestionAsignado' | translate }}</label>
+                    <p-dropdown [options]="centroPgtemd" (onChange)="changeCGestion($event)" formControlName="cGestion" name="cGestion" id="cGestion"></p-dropdown>
+                </div>
+                <div class="p-col-12">
+                    <label for="cPersonalizacion">{{ 'usuario.centroPersonalizacion' | translate }}</label>
+                    <p-dropdown [options]="centroCptemd" (onChange)="changeCPersonalizacion($event)" formControlName="cPersonalizacion" name="cPersonalizacion" id="cPersonalizacion"></p-dropdown>
+                </div>
+                <p-footer class="p-col-12" style="display: flex;">
+                    <div style="margin: 6px auto auto auto;">
+                        <div class="ui-dialog-buttonpane ui-helper-clearfix m-bottom m-top" style="text-align: center">
+                            <div *ngIf="!edit;else editar"></div>
+                            <ng-template #editar>
+                                <button type="button" pButton icon="pi pi-check" class="ui-button-raised ui-button-primary"
+                                    label="{{ 'listado.guardar' | translate}}" [disabled]="!formulario.valid" (click)="save()"></button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </p-footer>
+            </div>
+        </form>
+    </div>
+</p-dialog>

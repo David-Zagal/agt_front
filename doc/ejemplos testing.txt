@@ -1,0 +1,150 @@
+Curso Testing Angular:
+
+- Comprobar un string:
+
+	describe ('Prueba de strings', () => {
+		it('Debe devolver un string') => {
+			const resp = mensaje('Hola');
+			expect(typeof resp).toBe('string');
+		}
+	
+	
+- Comprobar que el resultado contenga algo:
+
+		it('Debe devolver un string') => {
+			const nombre = 'Juan';
+			const resp = mensaje(nombre);
+			expect(resp).toContain(nombre);
+		}
+	});
+		
+- Comprobar números:
+	
+	describe ('Prueba de números', () => {
+		it('Debe devolver 100 si el numero es > 100') => {
+			const resp = incrementar(300);
+			expect(resp).toBe(100);
+		}
+		
+		it('Debe devolver el numero + 1, si no es mayor a 100') => {
+			const resp = incrementar(50);
+			expect(resp).toBe(51);
+		}
+	});
+		
+- Comprobar booleans:
+
+	describe ('Prueba de booleans', () => {
+		it('Debe devolver true') => {
+			const resp = usuarioIngresado();
+			expect(resp).toBe(true);
+			expect(resp).toBeTruthy();
+		}
+		
+		it('Debe devolver false') => {
+			const resp = usuarioIngresado();
+			expect(resp).not.toBe(true);
+			expect(resp).not.toBeTruthy();
+		}
+	});
+		
+- Comprobar arrays:
+	export function obtenerRobots() {
+		return ['Megaman', ' Jarvis', 'Robocop'];
+	}
+	describe ('Prueba de arrays', () => {
+		it('Debe devolver 3 robots') => {
+			const res = obtenerRobots();
+			expect(res.length).toBe(3);
+			expect(res.length).toBeGreaterThanOrEqual(3);
+		}
+		
+		it('Debe existir megaman y ultron') => {
+			const res = obtenerRobots();
+			expect(res).toContain('Megaman');
+			expect(res).toContain('Ultron');
+		}
+	});
+	
+- Comprobar clases:
+
+	export Class Jugador {
+		hp: number;
+		constructor() {
+			this.hp = 100;
+		}
+		recibeDanio(danio: number) {
+			if(danio >= this.hp ) {
+				this.hp = 0;
+			} else {
+				this.hp = this.hp - danio;
+			}
+			return this.hp;
+		}
+	}
+	
+	describe( ' Pruebas de clase ', () => {
+		let jugador = new Jugador();
+		beforeEach( () => {
+			jugador = new Jugador();
+		});
+		
+		it ( 'Debe devolver 80 de hp, si recibe 20 de daño' () => {
+			const resp = jugador.recibeDanio(20);
+			expect(resp).toBe(80);
+		}
+		
+		it ( 'Debe devolver 50 de hp, si recibe 50 de daño' () => {
+			const resp = jugador.recibeDanio(50);
+			expect(resp).toBe(50);
+		}
+	});
+	
+- Comprobar un formulario:
+	
+		describe('Formularios', () => {
+			let componente: FormularioRegister;
+			
+			beforeEach( () => {
+				componente = new FormularioRegister( new FormBuilder() );
+			});
+			
+			it( 'Debe crear un formulario con dos campos', () => {
+				expect(componente.form.contains('email')).toBeTruthy();
+				expect(componente.form.contains('password')).toBeTruthy();
+			});
+			
+		}
+		
+- Comprobar servicios:
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+          declarations: [DetalleContratoComponent],
+          imports: [...],
+          providers: [
+            ListadoProgramasService
+          ]
+        })
+        .compileComponents();
+    }));
+
+    it('should create service', inject([ListadoProgramasService], (service: ListadoProgramasService) => {
+        expect(service).toBeTruthy();
+    }));
+    
+    it('Comprobamos que el valor de listadoProgramaService.planificacion exista', async () => {
+        const service: ListadoProgramasService = TestBed.get(ListadoProgramasService);
+        const planificacion = {
+          id_planificacion: 1,
+          id_contrato: 1,
+          fec_planificacion: '01/01/1970',
+          usuario: 'usuario'
+        }
+        // Método que rellenar la variable planificación
+        component.selectPlanificacion(planificacion);
+        
+        // Comprobamos que se rellene el servicio y el componente
+        expect(service.planificacion).toBeTruthy();
+        expect(component.planificaciones).toBeTruthy();
+      });

@@ -1,0 +1,305 @@
+p-button {
+    margin-right: .5em !important;
+}
+
+.ui-button-primary {
+    background-color: #064775 !important;
+    border: 1px solid #064775 !important;
+}
+
+.ui-button-primary:hover {
+    border: 1px solid #05395e !important;
+    background-color: #05395e !important;
+}
+
+.ui-button-secondary {
+    border: 1px solid #075c97 !important;
+}
+
+.ui-button-secondary:hover {
+    border: 1px solid #000 !important;
+}
+
+#link {
+    color: #075c97 !important;
+}
+
+.ui-article-meta {
+    font-size: 14px;
+    line-height: 21px;
+    color: #999999;
+}
+
+.ui-article-title {
+    font-size: 48px;
+    line-height: 58px;
+    font-weight: 300;
+    text-transform: none;
+    margin: 0 0 15px 0;
+}
+
+body .ui-breadcrumb {
+    border: none;
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+/* Container needed to position the overlay. Adjust the width as needed */
+
+.container {
+    position: relative;
+    width: 50%;
+    max-width: 300px;
+    /* height: 300px; [1.1] Set it as per your need */
+    overflow: hidden;
+    /* [1.2] Hide the overflowing of child elements */
+}
+
+
+/* Make the image to responsive */
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: width 2s, height 2s, transform 2s;
+    -moz-transition: width 2s, height 2s, -moz-transform 2s;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+    -o-transition: width 2s, height 2s, -o-transform 2s;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* When you mouse over the container, fade in the overlay title */
+
+.container:hover .overlay {
+    opacity: 1;
+}
+
+.container:hover .image {
+    transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    /* Firefox */
+    -webkit-transform: scale(1.5);
+    /* Chrome - Safari */
+    -o-transform: scale(1.5);
+    /* Opera */
+}
+
+.ui-article-lead {
+    color: #555555;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 300;
+}
+
+.ui-text-muted {
+    color: #999999 !important;
+}
+
+.ui-text-info {
+    color: #222 !important;
+}
+
+.ui-text-success {
+    color: #8cc14c !important;
+}
+
+.ui-text-warning {
+    color: #faa732 !important;
+}
+
+.ui-text-danger {
+    color: #da314b !important;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+:not(pre)>code,
+ :not(pre)>kbd,
+ :not(pre)>samp {
+    font-size: 14px;
+    font-family: Consolas, monospace, serif;
+    color: #075c97;
+    white-space: nowrap;
+    background: #f7f7f7;
+    padding: 2px;
+    border: 1px solid #dedede;
+}
+
+ins {
+    background: rgba(7, 92, 151, 0.2);
+    color: #555555;
+    text-decoration: none;
+}
+
+mark {
+    background: rgba(7, 92, 151, 0.2);
+    color: #555555;
+}
+
+q {
+    font-style: italic;
+    display: inline;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+abbr[title],
+abbr[data-original-title] {
+    cursor: help;
+}
+
+.ui-text-center {
+    text-align: center !important;
+}
+
+.ui-badge {
+    display: inline-block;
+    padding: 0 5px;
+    background: #075c97;
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 15px;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin: 0 2px;
+}
+
+.ui-badge-notification {
+    box-sizing: border-box;
+    min-width: 21px;
+    border-radius: 500px;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.ui-badge-success {
+    background-color: #8cc14c;
+}
+
+.ui-badge-warning {
+    background-color: #faa732;
+}
+
+.ui-badge-danger {
+    background-color: #da314b;
+}
+
+.ui-display-inline {
+    display: inline !important;
+}
+
+h1,
+.uk-h1 {
+    font-size: 48px;
+    line-height: 58px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 15px 0;
+    font-family: 'Source Sans Pro';
+    font-weight: 300;
+    color: #075c97;
+    text-transform: none;
+}
+
+blockquote {
+    padding-left: 15px;
+    border-left: 5px solid rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    line-height: 25px;
+    font-style: italic;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section,
+summary {
+    display: block;
+    list-style: none;
+}
+
+.uk-comment-header {
+    margin-bottom: 15px;
+}
+
+.uk-comment-avatar {
+    margin-right: 15px;
+    float: left;
+}
+
+.uk-comment-title {
+    margin: 5px 0 0 0;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.uk-comment-meta {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    line-height: 17px;
+    color: #999999;
+}
+
+.ui-widget-content {
+    line-height: 1.5;
+}
+
+.overview-box .ui-card-body {
+    background-image: linear-gradient(to right, #fff, #ccc);
+}
+
+.overview-box-primary .ui-card-body {
+    background-image: linear-gradient(to right, #243949, #075c97);
+    color: #dedede;
+}
+
+.overview-box-secundary .ui-card-body {
+    background-image: linear-gradient(to right, #ffba01, #e48900);
+    /*color: #dedede;*/
+}
+
+.divMargenes {
+    padding-left: 0px;
+    margin-bottom:15px; 
+    margin-top: 10px;
+}

@@ -1,0 +1,180 @@
+{
+    "Ng-PrimeLogin": "Aplicación para la Gestión de Tarjetas",
+    "Login": "Iniciar sesión",
+    "Register": "Registro",
+    "WelcomeMessage": "Bienvenido a AGT",
+    "Home": "Inicio",
+    "Volver": "Volver",
+    "Employees": "Empleados",
+    "Departments": "Departamentos",
+    "AboutUs": "Sobre nosotros",
+    "ContactUs": "Contacto",
+    "User": "usuario",
+    "NewUser": "Nuevo usuario",
+    "EditUser": "Modificar usuario",
+    "DetailUser": "Detalle de usuario",
+    "Password": "contraseña",
+    "Servicio comidas": "Servicio comidas",
+    "Facturación": "Facturación",
+    "Aniadir": "Añadir",
+    "AniadirUsuario": "Añadir usuario",
+    "XLS": " XLS",
+    "CSV": " CSV",
+    "ExportXLS": "Exportar en XLS",
+    "ExportCSV": "Exportar en CSV",
+    "Limpiar": "Limpiar",
+
+    "emplazamiento": {
+        "AniadirEmplazamiento": "Añadir emplazamiento",
+        "EditarEmplazamiento": "Editar emplazamiento",
+        "EliminarEmplazamiento": "Eliminar emplazamiento",
+        "DetalleEmplazamiento": "Detalle del emplazamiento",
+        "Direccion": "Dirección",
+        "NombreEmplazamiento": "Nombre emplazamiento",
+        "Localidad": "Localidad",
+        "Pais": "País",
+        "CP": "Código Postal",
+        "Provincia": "Provincia",
+        "Activo": "Activo",
+        "siActivo": "Si",
+        "noActivo": "No"
+    },
+
+    "centro": {
+        "AniadirCentro": "Añadir centro",
+        "EditarCentro": "Editar centro",
+        "EliminarCentro": "Eliminar centro",
+        "DetalleCentro": "Detalle del centro",
+        "NombreCentro": "Nombre del centro",
+        "Emplazamiento": "Emplazamiento",
+        "Localidad": "Localidad",
+        "Telefono": "Teléfono",
+        "TipoCentro": "Tipo de centro",
+        "PGTEMD": "PGTEMP",
+        "CPTEMD": "CPTEMD",
+        "Activo": "Activo",
+        "siActivo": "Si",
+        "noActivo": "No"
+    },
+
+    "fabricante": {
+        "AniadirFabricante": "Añadir fabricante",
+        "EditarFabricante": "Editar fabricante",
+        "EliminarFabricante": "Eliminar fabricante",
+        "ConsultarFabricante": "Detalle del fabricante",
+        "Direccion": "Dirección",
+        "NombreFabricante": "Nombre",
+        "Localidad": "Localidad",
+        "Pais": "País",
+        "CP": "Código Postal",
+        "Proveedor": "Proveedor",
+        "Fichero": "Fichero",
+        "Mail": "E-mail",
+        "Telefono": "Teléfono",
+        "Activo": "Activo",
+        "siActivo": "Si",
+        "noActivo": "No"
+    },
+
+    "tarjeta": {
+        "AniadirTarjetaModelo": "Añadir Modelo de Tarjeta",
+        "EditarTarjetaModelo": "Editar Modelo de Tarjeta",
+        "ConsultarTarjetaModelo": "Detalle del Modelo de Tarjeta",
+        "EliminarTarjetaModelo": "Eliminar Modelo de Tarjeta",
+        "DescAtr": "Atr.",
+        "DescMascAtr": "Máscara Atr.",
+        "DescTarjetaModelo": "Descripción",
+        "Activo": "Activo",
+        "siActivo": "Si",
+        "noActivo": "No",
+        "Fabricante": "Fabricante"
+    },
+
+    "tarjetaTipo": {
+        "AniadirTarjetaTipo": "Añadir Tipo de Tarjeta",
+        "EditarTarjetaTipo": "Editar Tipo de Tarjeta",
+        "ConsultarTarjetaTipo": "Detalle del Tipo de Tarjeta",
+        "EliminarTarjetaTipo": "Eliminar Tipo de Tarjeta",
+        "DescPersonalizacion": "Personalización",
+        "DescTarjetaTipo": "Tipo de Tarjeta",
+        "TarjetaModelo": "Modelo de Tarjeta",
+        "Activo": "Activo",
+        "siActivo": "Si",
+        "noActivo": "No"
+    },
+
+    "usuario": {
+        "Activo": "Activo",
+        "siActivo": "Si",
+        "noActivo": "No",
+        "centroGestionAsignado": "Centro de Gestión asignado",
+        "centroPersonalizacion": "Centro de Personalización",
+        "codigoUsuario": "Código usuario",
+        "nombre": "Nombre",
+        "primerApellido": "Primer Apellido",
+        "segundoApellido": "Segundo Apellido",
+        "eliminarUsuario": "Eliminar usuario"
+    },
+
+    "identificacion": {
+        "tipoDocumento": "Tipo Documento",
+        "documentoIdentificacion": "Documento Identificación",
+        "fechaNacimiento": "Fecha de nacimiento",
+        "nombre": "Nombre",
+        "primerApellido": "Primer Apellido",
+        "segundoApellido": "Segundo Apellido"
+    },
+
+    "menu": {
+        "opcionesMenu": "Opciones de menú",
+        "listado": "Listado",
+        "usuarios": "Usuarios",
+        "emplazamientos": "Emplazamientos",
+        "centros": "Centros",
+        "beneficiarios": "Beneficiarios",
+        "roles": "Roles",
+        "identificacion": "Identificación de solicitante",
+        "fabricante": "Fabricante",
+        "modeloTarjeta": "Modelo de Tarjeta",
+        "tipoTarjeta": "Tipo de Tarjeta"
+    },
+
+    "alertas": {
+        "bienvenida": "Bienvenid@ de nuevo",
+        "loginIncorrecto": "Error de inicio de sesión, compruebe sus credenciales e inténtelo de nuevo",
+        "alertaEliminar": "¿Realmente quiere eliminar el registro?",
+        "alertaAviso": "Aviso",
+        "regEliminado": "Registro eliminado con éxito",
+        "regNoEliminado": "No se ha eliminado el registro por dependencias con otra entidad",
+        "regAniadido": "Registro añadido con éxito",
+        "regEditado": "Registro editado con éxito",
+        "codRequerido": "El código es requerido",
+        "siConfirmacion": "Si",
+        "noConfirmacion": "No",
+        "solicitudEnviada": "Solicitud enviada con éxito"
+    },
+
+    "error": {
+        "backend": {
+            "generico": "Se ha producido un error al procesar la petición. Disculpe las molestias.",
+            "conexion": {
+                "404": "La página que ha solicitado no se encuentra disponible. Disculpe las molestias.",
+                "424": "Se ha producido un error en el acceso a un servicio externo a este aplicación. Disculpe las molestias.",
+                "500": "Algo salió mal en el servidor del sitio web. Disculpe las molestias.",
+                "403": "Acceso denegado al servidor del sitio web. Disculpe las molestias.",
+                "401": "No tiene autorización para acceder al sitio web. Disculpe las molestias.",
+                "generico": "El servidor del sitio web no se encuentra disponible. Disculpe las molestias."
+            },
+            "session": "No tiene acceso a la aplicación o su sesión ha caducado. Puede volver a iniciar sesión."
+        }
+    },
+
+    "listado": {
+        "guardar": "Guardar",
+        "editar": "Editar",
+        "consultar": "Consultar",
+        "eliminar": "Eliminar",
+        "roles": "Roles",
+        "enviar": "Enviar"
+    }
+}

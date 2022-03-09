@@ -1,0 +1,149 @@
+<div class="divMargenes" id="container">
+    <div class="p-col-2">
+        <p-button type="button" id="btnAniadir" icon="pi pi-plus" label="&nbsp;{{'fabricante.AniadirFabricante' | translate}}"
+            class="ui-button-raised ui-button-primary" (click)="addFabricante()"></p-button>
+    </div>
+    <div class="p-col right">
+        <p-button type="button" id="btnXLS" label="&nbsp;{{'XLS' | translate}}" icon="pi pi-download" title="{{'ExportXLS' | translate}}"
+            styleClass="ui-button-success" pRipple class="p-mb-2" (click)="exportarExcelFabricantes()"></p-button>
+    </div>
+    <div class="p-col right">
+        <p-button type="button" id="btnCSV" label="&nbsp;{{'CSV' | translate}}" icon="pi pi-download" title="{{'ExportCSV' | translate}}"
+            styleClass="ui-button-success" pRipple class="p-mb-2" (click)="exportarCsvFabricantes()"></p-button>
+    </div>
+</div>
+<div>
+    <p-table #dt [columns]="cols" [value]="fabricantes" [paginator]="true" [rows]="10" dataKey="direccion"
+        [resizableColumns]="true" [reorderableColumns]="true">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="width:12em !important">{{'Acciones' | translate}}</th>
+            </tr>
+            <tr [style.fontSize.px]="fontSize">
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'descNombre', 'contains')" placeholder="Filtra por Nombre" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'descDireccion', 'contains')" placeholder="Filtra por Dirección" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'descLocalidad', 'contains')" placeholder="Filtra por Localidad" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'descMail', 'contains')" placeholder="Filtra por Mail" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'descTelefono', 'contains')" placeholder="Filtra por Teléfono" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'activos', 'contains')" placeholder="Filtra por Activo" class="ui-column-filter">
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td style="text-align:center">
+                    <p-button type="button" icon="pi pi-eye" styleClass="ui-button-raised ui-button-primary"
+                        (click)="consultar(rowData.idFabricante)" title="{{'listado.consultar' | translate}}"></p-button>
+                    <p-button type="button" icon="pi pi-pencil" styleClass="ui-button-raised ui-button-primary"
+                        (click)="editar(rowData.idFabricante)" title="{{'listado.editar' | translate}}"></p-button>
+                    <p-button type="button" icon="pi pi-trash" styleClass="ui-button-raised ui-button-primary"
+                        (click)="delete(rowData.idFabricante)" title="{{'listado.eliminar' | translate}}"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog #cd header="{{'fabricante.EliminarFabricante' | translate}}" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
+            label="{{'alertas.siConfirmacion' | translate}}" (click)="cd.accept()"></p-button>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-times"
+            label="{{'alertas.noConfirmacion' | translate}}" (click)="cd.reject()"></p-button>
+    </p-footer>
+</p-confirmDialog>
+<p-dialog header="{{ titleHeader }}" [(visible)]="displayDialog" [responsive]="true"
+    showEffect="fade" [modal]="true" [style]="{width: '500px'}">
+    <div class="ui-g ui-fluid" *ngIf="fabricanteEdit">
+        <form [formGroup]="formulario" *ngIf="displayDialog">
+            <div class="p-col-12 p-grid p-justify-center">
+                <div class="p-col-12">
+                    <label for="descNombre">{{ 'fabricante.NombreFabricante' | translate }} *</label>
+                    <input formControlName="descNombre" pInputText id="descNombre" maxlength="100" />
+                    <p-message severity="error" [text]="formulario.controls['descNombre'].errors['required'] ? ' El Nombre del fabricante es requerido': ''" *ngIf="!formulario.controls['descNombre'].valid&&formulario.controls['descNombre'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descDireccion">{{ 'fabricante.Direccion' | translate }}</label>
+                    <input formControlName="descDireccion" pInputText id="descDireccion" maxlength="200" />
+                    <p-message severity="error" [text]="formulario.controls['descDireccion'].errors['required'] ? ' La dirección es requerida': ''" *ngIf="!formulario.controls['descDireccion'].valid&&formulario.controls['descDireccion'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descLocalidad">{{ 'fabricante.Localidad' | translate }}</label>
+                    <input formControlName="descLocalidad" pInputText id="descLocalidad" maxlength="200" />
+                    <p-message severity="error" [text]="formulario.controls['descLocalidad'].errors['required'] ? ' La localidad es requerida': ''" *ngIf="!formulario.controls['descLocalidad'].valid&&formulario.controls['descLocalidad'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descCp">{{ 'fabricante.CP' | translate }}</label>
+                    <input (keydown)="isNumberKey($event)" formControlName="descCp" pInputText id="descCp" maxlength="5" />
+                </div>
+                <div class="p-col-12">
+                    <label for="descPais">{{ 'fabricante.Pais' | translate }}</label>
+                    <input formControlName="descPais" pInputText id="descPais" maxlength="20" />
+                    <p-message severity="error" [text]="formulario.controls['descPais'].errors['required'] ? ' El País es requerido': ''" *ngIf="!formulario.controls['descPais'].valid&&formulario.controls['descPais'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descProveedor">{{ 'fabricante.Proveedor' | translate }}</label>
+                    <input formControlName="descProveedor" pInputText id="descProveedor" maxlength="100" />
+                    <p-message severity="error" [text]="formulario.controls['descProveedor'].errors['required'] ? ' El proveedor es requerido': ''" *ngIf="!formulario.controls['descProveedor'].valid&&formulario.controls['descProveedor'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descTelefono">{{ 'fabricante.Telefono' | translate }}</label>
+                    <input formControlName="descTelefono" pInputText id="descTelefono" maxlength="20" />
+                    <p-message severity="error" [text]="formulario.controls['descTelefono'].errors['required'] ? ' El teléfono es requerido': ''" *ngIf="!formulario.controls['descTelefono'].valid&&formulario.controls['descTelefono'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descMail">{{ 'fabricante.Mail' | translate }}</label>
+                    <input formControlName="descMail" pInputText id="descMail" maxlength="200" />
+                    <p-message severity="error" [text]="formulario.controls['descMail'].errors['required'] ? ' El mail es requerido': ''" *ngIf="!formulario.controls['descMail'].valid&&formulario.controls['descMail'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="descFichero">{{ 'fabricante.Fichero' | translate }}</label>
+                    <input formControlName="descFichero" pInputText id="descFichero" maxlength="20" />
+                    <p-message severity="error" [text]="formulario.controls['descFichero'].errors['required'] ? ' El fichero es requerido': ''" *ngIf="!formulario.controls['descFichero'].valid&&formulario.controls['descFichero'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label style="margin-right: 2em;">{{ 'fabricante.Activo' | translate }} *</label>
+                    <label class="form-check-label" for="activoSi">{{ 'fabricante.siActivo' | translate }}</label>
+                    <input class="form-check-input" type="radio" formControlName="indActivo" [value]="1" required id="activoSi" />
+                    <label class="form-check-label" style="margin-left: 1.5em;" for="activoNo">{{ 'fabricante.noActivo' | translate }}</label>
+                    <input class="form-check-input" type="radio" formControlName="indActivo" [value]="0" required id="activoNo" />
+                </div>
+                <p-footer class="p-col-6">
+                    <div class="ui-dialog-buttonpane ui-helper-clearfix m-bottom m-top"><br>
+                        <div *ngIf="!edit;else editar"></div>
+                        <ng-template #editar>
+                            <button type="button" pButton icon="fa fa-check" class="ui-button-raised ui-button-primary"
+                                label="{{ 'listado.guardar' | translate }}" [disabled]="!formulario.valid" (click)="save()"></button>
+                        </ng-template>
+                    </div>
+                </p-footer>
+            </div>
+        </form>
+    </div>
+</p-dialog>

@@ -1,0 +1,57 @@
+<div class="ng-header">
+  <div class="ng-header-left left">
+    <div class="logo right">
+        <img src="assets/images/minisdef.jpg" class="logo-large" alt="MinisdefLogo">
+        <img src="assets/images/minisdef-small.png" class="logo-small" alt="MinisdefSmallLogo">
+    </div>
+</div>
+<div class="center">
+    <div class="logo left">
+        <!--<img src="assets/images/{{app}}-large.png" class="logo-large">
+        <img src="assets/images/{{app}}-small.png" class="logo-small">-->
+        <span style="font-size: 32px; margin-left: 5px;">AGT</span>
+    </div>
+</div>
+</div>
+<div class="monitor-content">
+  <p-card header="Monitor de estados">
+      <p-table [value]="estados" dataKey="estado" [responsive]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" style="width:20%">{{ 'Nombre' | translate}}</th>
+            <th scope="col" style="width:40%">{{ 'Url' | translate}}</th>
+            <th scope="col" style="width:40%">{{ 'Descripcion' | translate}}</th>
+          </tr>
+        </ng-template>
+    
+        <ng-template pTemplate="body" let-estados>
+            <tr [ngClass]="{'ui-text-danger':estados.estado === 'KO'}">
+              <td class="boldText columnaNombre">
+                <div class="p-grid p-align-center" style="margin-top: 0rem;">
+                    <ng-template [ngIf]="estados.estado === 'OK'">
+                      <em class="fa fa-check-square fa-2x ui-text-success"></em>
+                    </ng-template>
+                    <ng-template [ngIf]="estados.estado !== 'OK'">
+                      <em class="fa fa-window-close fa-2x ui-text-danger"></em>
+                    </ng-template>
+                    <span>
+                      {{estados.nombre}}
+                    </span>
+                </div> 
+              </td>
+              <td class="columnaUrl" title="{{estados.url}}">
+                {{estados.url}}
+              </td>
+              <td>
+                {{estados.mensaje}}
+              </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-estados>
+            <p>No hay resultados</p>
+        </ng-template>
+      </p-table>
+  </p-card>
+
+</div>
+

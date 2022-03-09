@@ -1,0 +1,13 @@
+<p-panel header="Pruebas" *ngIf="permisos.includes('panel')">
+    panel con permisos
+</p-panel>
+<p-panel header="Pruebas">
+    <h1>Botón con permisos</h1>
+    <hr>
+    <p-button label="Click 1" (click)="funcion1()" *ngIf="permisos.includes('boton1')" class="boton"></p-button>
+    <p-button label="Click 2" (click)="funcion2()" *ngIf="permisos.includes('boton2')" class="boton"></p-button>
+    <p-button label="Click 3" (click)="funcion3()" *ngIf="permisos.includes('boton3')" class="boton"></p-button>
+    <p-button label="Click 4" (click)="funcion4()" *ngIf="permisos.includes('boton4')" class="boton"></p-button>
+    <p-button label="Click 5" (click)="funcion5()" *ngIf="permisos.includes('boton5')" class="boton"></p-button>
+    <p-button label="Click 6" (click)="funcion5()" *ngIf="permisos.includes('boton6')" class="boton"></p-button>
+</p-panel>

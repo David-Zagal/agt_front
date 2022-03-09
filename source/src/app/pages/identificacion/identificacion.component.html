@@ -1,0 +1,45 @@
+<div class="divMargenes" id="container">
+    <div class="ui-g ui-fluid" *ngIf="identificacion">
+        <p-toast [style]="{marginTop: '80px'}" key="myToast"></p-toast>
+        <form [formGroup]="formulario">
+            <div class="p-col-10 p-grid p-justify-left">
+                <div class="p-col-4">
+                    <label for="tipoDoc">{{ 'identificacion.tipoDocumento' | translate}} *</label>
+                    <p-dropdown [options]="tipoDocumento" formControlName="tipoDoc" (onchange)="validarNuevoSolicitante()"></p-dropdown>
+                </div>
+                <div class="p-col-6">
+                    <label for="numDoc">{{ 'identificacion.documentoIdentificacion' | translate}} *</label>
+                    <input formControlName="numDoc" pInputText id="numDoc" />
+                </div>
+                <div class="p-col-10">
+                    <label for="nombre">{{ 'identificacion.nombre' | translate}} *</label>
+                    <input formControlName="nombre" pInputText id="nombre" />
+                </div>
+                <div class="p-col-10">
+                    <label for="primerApellido">{{ 'identificacion.primerApellido' | translate}} *</label>
+                    <input formControlName="primerApellido" pInputText id="primerApellido" />
+                </div>
+                <div class="p-col-10">
+                    <label for="segundoApellido">{{ 'identificacion.segundoApellido' | translate}}</label>
+                    <input formControlName="segundoApellido" pInputText id="segundoApellido" />
+                </div>
+                <div class="p-col-4">
+                    <label for="fechaNacimiento">{{ 'identificacion.fechaNacimiento' | translate}} *</label>
+                    <p-calendar formControlName="fechaNacimiento" id="fechaNacimiento" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" appendTo="body" dateFormat="dd/mm/yy" [locale]="es" yearRange="1900:2100" [maxDate]="fecHoy"></p-calendar>
+                </div>
+                <p-footer class="p-col-10" style="display: flex;">
+                    <div style="margin: 8px auto auto auto;">
+                        <div class="ui-dialog-buttonpane ui-helper-clearfix m-bottom m-top" style="text-align: center">
+                            <p-button type="button" icon="pi pi-check" styleClass="ui-button-raised ui-button-primary" 
+                                label="&nbsp;{{ 'listado.enviar' | translate}}" [disabled]="!formulario.valid" (click)="enviar()">
+                            </p-button>
+                            <p-button type="button" icon="pi pi-trash" styleClass="ui-button-raised ui-button-primary"
+                                (click)="limpiar()" label="&nbsp;{{ 'Limpiar' | translate}}">
+                            </p-button>
+                        </div>
+                    </div>
+                </p-footer>
+            </div>
+        </form>
+    </div>
+</div>

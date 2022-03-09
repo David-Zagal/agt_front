@@ -1,0 +1,62 @@
+<div class="login-panel">
+
+    <div class="p-grid p-nogutter p-justify-center p-align-center" style="height:100%;">
+        <div class="p-xl-3 p-lg-6 p-md-8 p-sm-10">
+
+            <p-panel class="center">
+                <p-header>
+                    <div class="p-grid">
+                        <div class="p-lg-1" style="padding: 0px;"></div>
+                        <div class="p-lg-10" style="margin-top: auto; margin-bottom: auto;">{{ 'Ng-PrimeLogin' | translate}}</div>
+                        <div class="p-lg-1" style="padding: 0px;text-align:right;">
+
+                            <a class="icon" (click)="infoVersions.toggle($event)"><em class="fa fa-info"></em></a>
+
+                            <p-overlayPanel #infoVersions>
+                                <div style="border-bottom: 1px solid gray;padding-bottom:1em;text-align: left;">
+                                    <strong><label>Front: </label></strong><em [innerHtml]="versionService.getFrontVersion()"></em> (<em [innerHtml]="versionService.getFrontDate()"></em>)
+                                </div>
+                                <div style="padding-top:1em;text-align: left;">
+                                    <strong><label>Back: </label></strong><em [innerHtml]="versionService.getBackVersion()"></em> (<em [innerHtml]="versionService.getBackDate()"></em>)
+                                </div>
+                            </p-overlayPanel>
+                        </div>
+                    </div>
+
+                </p-header>
+
+                <form [formGroup]="loginForm">
+                    <div class="p-grid p-justify-center p-align-center">
+                        <div class="p-xl-12 p-lg-6 p-md-8 p-sm-10">
+                            <img src="assets/images/LogoMINISDEF.svg" class="login-logo" style="padding-top: 10px">
+                        </div>
+                        <div class="p-col-12">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                                <input id="input-username" type="text" size="20" pInputText formControlName="userName" placeholder="{{'User' | translate}}">
+                            </div>
+                        </div>
+                        <div class="p-col-12">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+                                <input id="input-password" type="password" size="20" pInputText formControlName="password" placeholder="{{'Password' | translate}}" (keydown.enter)="onClickLogin()">
+                            </div>
+                        </div>
+                        <div class="p-col-12 center">
+                            <!--<a>Forgot Password?</a>-->
+                        </div>
+                    </div>
+                    <div class="p-grid">
+                        <div class="p-col-12">
+                            <button pButton type="button" label="{{ 'Login' | translate}}" class="ui-button-raised ui-button-primary" (click)="onClickLogin()" [disabled]="!loginForm.valid" title="{{ 'Login' | translate}}"></button>
+                        </div>
+                        <!--<div class="p-col-6">
+            <button pButton type="button" label="{{ 'Register' | translate}}" class="ui-button-raised"
+              [routerLink]="['/register']"></button>
+          </div>-->
+                    </div>
+                </form>
+            </p-panel>
+        </div>
+    </div>
+</div>

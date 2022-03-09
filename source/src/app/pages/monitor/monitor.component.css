@@ -1,0 +1,16 @@
+.columnaNombre span{
+    margin-left: 10px;
+}
+
+.columnaUrl{
+    overflow:hidden; 
+    text-overflow: ellipsis;
+}
+
+.fa-2x{
+    font-size:25px;
+}
+
+.monitor-content{
+    padding:2rem 2rem 2rem 2rem;
+}

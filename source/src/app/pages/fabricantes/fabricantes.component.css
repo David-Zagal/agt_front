@@ -1,0 +1,7 @@
+#container div {
+    display:inline-block;
+}
+
+.right {
+    margin-right: -1%;
+}

@@ -1,0 +1,69 @@
+<p>Componente Documentum</p>
+
+<p-panel>
+    <div class="ui-g">
+        Imagen descargada de documentum:
+
+        <div class="ui-g-12" *ngIf="idImagen === 'null'; else imagen">
+            <img src="./assets/images/no-image-slide.png" alt="No image available" class="responsive">
+        </div>
+        <ng-template #imagen>
+            <div class="ui-g-12">
+                <img [src]="idImagen" alt="{{idImagen}}" class="responsive" width="300px">
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <p-card header="OTRA DOCUMENTACIÓN">
+                <input class="inputs" formControlName="otraDocumentacion" style="display: none;" type="text" pInputText>
+                <div class="ficheros" style="margin-top: 10px;">
+                    <div class="ui-g">
+                        <div class="ui-g-11">
+                            <label>Ficheros</label>
+                        </div>
+                        <div class="ui-g-1">
+                            <button pButton type="button" (click)="showDialog()"
+                                styleClass="ui-button-raised ui-button-primary ui-button-secondary"
+                                icon="pi pi-plus"></button>
+                        </div>
+                    </div>
+                    <div class="ui-g" *ngFor="let fichero of ficheros; let i = index">
+                        <div class="ui-g-6">
+                            <input class="inputs" type="text" pInputText value="{{fichero.nombre}}" disabled />
+                        </div>
+                        <div class="ui-g-4"><input class="inputs" type="text" pInputText
+                                value="{{fichero.denominacionFichero}}" disabled /></div>
+                        <div class="ui-g-2">
+                            <button pButton (click)="fileUploadService.visualizarDocumento(fichero.id)" type="button"
+                                class="btns" styleClass="ui-button-raised ui-button-primary ui-button-secondary"
+                                icon="pi pi-ellipsis-h" style="margin-right: 2px;"></button>
+                            <button pButton (click)="deleteFichero(i, 1, fichero.id)" type="button" class="btns"
+                                styleClass="ui-button-raised ui-button-primary ui-button-secondary"
+                                icon="pi pi-times"></button>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</p-panel>
+
+
+
+<p-dialog header="Subida ficheros" [(visible)]="display">
+    <form [formGroup]="ficheroForm">
+        <div style="margin-top: 25px;margin-bottom: 25px;">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" size="30" formControlName="denominacionFichero" pInputText>
+                <label for="float-input">Descripción</label>
+            </span>
+        </div>
+        <p-fileUpload #form customUpload="true" (uploadHandler)="myUploader($event, form)" chooseLabel="Añadir"
+            uploadLabel="Subir" cancelLabel="Cancelar" fileLimit="1"></p-fileUpload>
+        <button pButton (click)="aniadirFichero(form)" type="submit" label="Añadir Fichero"
+            [disabled]="!ficheroForm.valid" style="margin-top: 10px;"
+            class="ui-button-raised ui-button-primary"></button>
+    </form>
+</p-dialog>

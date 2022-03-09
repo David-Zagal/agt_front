@@ -1,0 +1,11 @@
+.right {
+    margin-right: auto;
+}
+
+.btnAniadir {
+    margin-left: 1px;
+}
+
+#container div {
+    display: inline-block;
+}

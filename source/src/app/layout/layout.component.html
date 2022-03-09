@@ -1,0 +1,19 @@
+<app-header (toggleMenubar)="toggleMenu()" style=""></app-header>
+<div class="ng-content" [ngClass]="{'hidden-menu-content': !isMobileResolution && !isMenuVisible}"
+  style="height: calc(100vh - 50px)">
+  <p-sidebar #menubar [visible]="isMenuVisible" position="left" [showCloseIcon]="false" styleClass="np-menubar"
+    [modal]="false">
+    <app-menu (closeClicked)="isMobileResolution && isMenuVisible=$event" [items]="menuItems" className="np-menu">
+    </app-menu>
+  </p-sidebar>
+  <div class="headerPages">
+    <!--<p-card>
+      <p class="feature-title ui-card-subtitle" style="margin-bottom:10px">{{tituloPagina}}</p>-->
+      <p-breadcrumb [model]="items"></p-breadcrumb>
+    <!--</p-card>-->
+  </div>
+  <!--<p-card>-->
+    <router-outlet></router-outlet>
+  <!--</p-card>-->
+</div>
+<!--<app-footer></app-footer>-->

@@ -1,0 +1,95 @@
+<div *ngIf="permisos.includes('listado')">
+    <p-table #dt1 [columns]="cols" [value]="opcionesMenu" [paginator]="true" [rows]="10" dataKey="idOpcMenu"
+        [resizableColumns]="true" [reorderableColumns]="true" stateStorage="session" stateKey="statedemo-session">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th *ngIf="permisos.includes('editar') || permisos.includes('eliminar')"
+                    style="width:8em !important">{{'Acciones' | translate}}</th>
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" [ngSwitch]="col.field" class="ui-fluid">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)"
+                        [value]="dt1.filters[col.field]?.value">
+                </th>
+                <th *ngIf="permisos.includes('editar') || permisos.includes('eliminar')"
+                    style="width:8em">
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td *ngIf="permisos.includes('editar') || permisos.includes('eliminar')"
+                    style="text-align:center">
+                    <p-button type="button" icon="pi pi-pencil" *ngIf="permisos.includes('editar')"
+                        styleClass="ui-button-raised ui-button-primary"
+                        (click)="editar(rowData.idOpcMenu)"></p-button>
+
+                    <p-button type="button" icon="pi pi-trash" *ngIf="permisos.includes('eliminar')"
+                        styleClass="ui-button-raised ui-button-primary"
+                        (click)="delete(rowData.idOpcMenu)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div style="text-align: center">
+    <p-button type="button" id="btnAñadir" label="{{'Añadir' | translate}}" id="btnAñadir"
+        *ngIf="permisos.includes('añadir')" styleClass="ui-button-raised ui-button-primary"
+        (click)="add()"></p-button>
+</div>
+<p-confirmDialog #cd header="{{'listado.eliminar' | translate}}" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
+            label="{{'alertas.siConfirmacion' | translate}}" (click)="cd.accept()"></p-button>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-times"
+            label="{{'alertas.noConfirmacion' | translate}}" (click)="cd.reject()"></p-button>
+    </p-footer>
+</p-confirmDialog>
+<p-dialog header="{{'menu.opcionesMenu' | translate }}" [(visible)]="displayDialog" [responsive]="true"
+    showEffect="fade" [modal]="true" [style]="{width: '500px'}">
+    <div class="ui-g ui-fluid" *ngIf="opcionMenuEdit">
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario.value)">
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="descripcion">{{'Descripción' | translate }}</label>
+                </div>
+                <div class="ui-g-8">
+                    <input formControlName="descripcion" pInputText id="descripcion"
+                        [(ngModel)]="opcionMenuEdit.descripcion" />
+                    <p-message severity="error"
+                        [text]="formulario.controls['descripcion'].errors['required'] ? 'El codigo es requerido':''"
+                        *ngIf="!formulario.controls['descripcion'].valid&&formulario.controls['descripcion'].dirty">
+                    </p-message>
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="URI">{{'URI' | translate}}</label>
+                </div>
+                <div class="ui-g-8">
+                    <input formControlName="uri" pInputText id="uri"
+                        [(ngModel)]="opcionMenuEdit.uri" />
+                    <p-message severity="error"
+                        [text]="formulario.controls['uri'].errors['required'] ? 'La uri es requerida' : ''"
+                        *ngIf="!formulario.controls['uri'].valid&&formulario.controls['uri'].dirty">
+                    </p-message>
+                </div>
+            </div>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                    <p-button type="button" icon="pi pi-check" label="{{'listado.guardar' | translate}}"
+                        *ngIf="permisos.includes('añadir')" styleClass="ui-button-raised ui-button-primary"
+                        (click)="save()" [disabled]="!formulario.valid"></p-button>
+                </div>
+            </p-footer>
+        </form>
+    </div>
+</p-dialog>

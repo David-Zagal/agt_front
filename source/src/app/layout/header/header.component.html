@@ -1,0 +1,95 @@
+<div class="ng-header">
+    <div class="ng-header-left left">
+        <div class="toggle-menu-button left">
+            <a class="icon" (click)="toggleMenu()"><em class="fa fa-bars"></em></a>
+        </div>
+        <div class="logo right">
+            <img src="assets/images/minisdef.jpg" class="logo-large" alt="MinisdefLogo">
+            <img src="assets/images/minisdef-small.png" class="logo-small" alt="MinisdefSmallLogo">
+        </div>
+    </div>
+    <div class="center">
+        <div class="logo left" style="padding-top: 9px;">
+            <!--<img src="assets/images/{{app}}-large.png" class="logo-large">
+            <img src="assets/images/{{app}}-small.png" class="logo-small">-->
+           <!-- <span style="font-size: 32px; margin-left: 5px;">AGT</span>-->
+            <span style="font-size: 25px; padding-left: 10px;">Aplicación para la Gestión de Tarjetas</span>
+        </div>
+    </div>
+    <div class="ng-header-right right">
+        <div class="ng-header-right-item left" style="padding-top: 15px;">
+            <p-selectButton (click)="onLanguageChange()" [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name">
+                <ng-template let-item>
+                    <!--<img src="assets/images/{{item.value.flag}}" style="padding-top: 4px;" />-->
+                    <span style="padding: 10px; padding-top: 10px">{{item.value.locale}}</span>
+                    <span>{{item.name}}</span>
+                </ng-template>
+            </p-selectButton>
+        </div>
+        <div class="ng-header-right-item right">
+            <a class="icon" (click)="logout()"><em class="fa fa-sign-out-alt"></em></a>
+        </div>
+        <div class="ng-header-right-item right" (click)="infoVersions.toggle($event)">
+            <a class="icon"><em class="fa fa-info"></em></a>
+        </div>
+        <!--<div class="ng-header-right-item right" (click)="showNotificationSidebar()">
+            <a class="icon"><em class="fa fa-bell"></em><span class="badge">5</span></a>
+        </div>-->
+        <div class="ng-header-right-item right" (click)="userdetails.toggle($event)">
+            <a class="icon"><span [innerHtml]="user.codUsuario" class="user-name"></span><em class="fa fa-user"></em></a>
+        </div>
+    </div>
+</div>
+
+<!-- user detials overlay panel -->
+<p-overlayPanel #userdetails>
+    <div><em [innerHtml]="user.codUsuario"></em></div>
+</p-overlayPanel>
+
+<p-overlayPanel #infoVersions>
+    <div style="border-bottom: 1px solid gray;padding-bottom:1em;text-align: left;">
+        <strong><label>Front: </label></strong><em [innerHtml]="versionService.getFrontVersion()"></em> (<em [innerHtml]="versionService.getFrontDate()"></em>)
+    </div>
+    <div style="padding-top:1em;text-align: left;">
+        <strong><label>Back: </label></strong><em [innerHtml]="versionService.getBackVersion()"></em> (<em [innerHtml]="versionService.getBackDate()"></em>)
+    </div>
+</p-overlayPanel>
+<!-- user detials overlay panel -->
+<!--p-overlayPanel #infoVersions>
+    <div>
+        <h3>Front:</h3>
+        Versión: <em [innerHtml]="frontVersion"></em><br> Fecha: <em [innerHtml]="frontDate"></em>
+    </div>
+
+    <div style="border-top: 1px solid gray;" *ngIf="backVersion">
+        <h3>Back: </h3>
+        Versión: <em [innerHtml]="backVersion.version"></em><br> Fecha: <em [innerHtml]="backVersion.timeStamp"></em>
+    </div>
+</p-overlayPanel-->
+
+<!-- notifications sidebar -->
+<p-sidebar [(visible)]="displayNotifications" position="right">
+    <div *ngFor="let notification of notifications; let i=index" class="notification-message">
+        <div><strong>Message: </strong><em [innerHtml]="notification.message"></em></div>
+        <div><em>Created On: </em><em [innerHtml]="notification.createdOn | date:'dd/MM/yyyy'"></em></div>
+    </div>
+</p-sidebar>
+
+<!-- theme chooser overlay panel -->
+<p-overlayPanel #themeChooser>
+    Select Theme:
+    <div class="ui-g">
+        <div class="ui-g-3">
+            <button pButton type="button" (click)="selectTheme('theme-1')" style="background-image: -webkit-gradient(linear, left top, right top, from(#517fa4), to(#243949));"></button>
+        </div>
+        <div class="ui-g-3">
+            <button pButton type="button" (click)="selectTheme('theme-2')" style="background-image: -webkit-gradient(linear, left top, right top, from(#39e2c9), to(#2d97cb));"></button>
+        </div>
+        <div class="ui-g-3">
+            <button pButton type="button" (click)="selectTheme('theme-3')" style="background-image: -webkit-gradient(linear, left top, right top, from(#009688), to(#00897B));"></button>
+        </div>
+        <div class="ui-g-3">
+            <button pButton type="button" (click)="selectTheme('theme-4')" style="background-image: -webkit-gradient(linear, left top, right top, from(#f2c58c), to(#f2918b));"></button>
+        </div>
+    </div>
+</p-overlayPanel>

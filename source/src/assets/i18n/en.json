@@ -1,0 +1,179 @@
+{
+    "Ng-PrimeLogin": "Aplicación para la Gestión de Tarjetas",
+    "Login": "Login",
+    "Register": "Register",
+    "WelcomeMessage": "Welcome",
+    "Home": "Home",
+    "Volver": "Back",
+    "Employees": "Employees",
+    "Departments": "Departments",
+    "AboutUs": "About Us",
+    "ContactUs": "Contact Us",
+    "User": "user",
+    "NewUser": "New user",
+    "Password": "password",
+    "Servicio comidas": "Food service",
+    "Facturación": "Billing",
+    "Aniadir": "Add",
+    "AniadirUsuario": "Add User",
+    "EditUser": "Edit User",
+    "DetailUser": "User detail",
+    "XLS": " XLS",
+    "CSV": " CSV",
+    "ExportXLS": "Export to XLS",
+    "ExportCSV": "Export to CSV",
+    "Limpiar": "Limpiar",
+
+    "emplazamiento": {
+        "AniadirEmplazamiento": "Add Location",
+        "EditarEmplazamiento": "Edit Location",
+        "EliminarEmplazamiento": "Delete Location",
+        "DetalleEmplazamiento": "Location detail",
+        "Direccion": "Direction",
+        "NombreEmplazamiento": "Location Name",
+        "Localidad": "Location",
+        "Pais": "Country",
+        "CP": "Postal Code",
+        "Provincia": "Province",
+        "Activo": "Active",
+        "siActivo": "Yes",
+        "noActivo": "No"
+    },
+
+    "centro": {
+        "AniadirCentro": "Add Centre",
+        "EditarCentro": "Edit Center",
+        "EliminarCentro": "Delete Center",
+        "DetalleCentro": "Center Detail",
+        "NombreCentro": "Center Name",
+        "Localidad": "Location",
+        "Telefono": "Telephone",
+        "TipoCentro": "Center Type",
+        "PGTEMD": "PGTEMP",
+        "CPTEMD": "CPTEMD",
+        "Activo": "Active",
+        "siActivo": "Yes",
+        "noActivo": "No"
+    },
+
+    "fabricante": {
+        "AniadirFabricante": "Add maker",
+        "EditarFabricante": "Edit maker",
+        "EliminarFabricante": "Delete maker",
+        "ConsultarFabricante": "Maker detail",
+        "Direccion": "Address",
+        "NombreFabricante": "Name",
+        "Localidad": "Location",
+        "Pais": "Country",
+        "CP": "Postal Code",
+        "Proveedor": "Supplier",
+        "Fichero": "File",
+        "Mail": "E-mail",
+        "Telefono": "Telephone",
+        "Activo": "Active",
+        "siActivo": "Yes",
+        "noActivo": "No"
+    },
+
+    "tarjeta": {
+        "AniadirTarjetaModelo": "Add Card Model",
+        "EditarTarjetaModelo": "Edit Card Model",
+        "ConsultarTarjetaModelo": "Card Model Detail",
+        "EliminarTarjetaModelo": "Delete Card Model",
+        "DescAtr": "Atr.",
+        "DescMascAtr": "Mask Atr.",
+        "DescTarjetaModelo": "Description",
+        "Activo": "Active",
+        "siActivo": "Yes",
+        "noActivo": "No",
+        "Fabricante": "Maker",
+        "AniadirTarjetaTipo": "Add Card Type",
+        "EditarTarjetaTipo": "Edit Card Type",
+        "ConsultarTarjetaTipo": "Card Type Detail",
+        "DescPersonalizacion": "personalization",
+        "DescTarjetaTipo": "Card Type"
+    },
+
+    "tarjetaTipo": {
+        "AniadirTarjetaTipo": "Add Card Type",
+        "EditarTarjetaTipo": "Edit Card Type",
+        "ConsultarTarjetaTipo": "Card Type Detail",
+        "EliminarTarjetaTipo": "Delete Card Type",
+        "DescPersonalizacion": "personalization",
+        "DescTarjetaTipo": "Card Type",
+        "TarjetaModelo": "Model Card"
+    },
+
+    "usuario": {
+        "Activo": "Active",
+        "siActivo": "Yes",
+        "noActivo": "No",
+        "centroGestionAsignado": "Assigned Management Center",
+        "centroPersonalizacion": "Personalization Center",
+        "codigoUsuario": "User code",
+        "nombre": "Name",
+        "primerApellido": "First Surname",
+        "segundoApellido": "Second Surname",
+        "eliminarUsuario": "Delete user"
+    },
+    "identificacion": {
+        "tipoDocumento": "Document type",
+        "documentoIdentificacion": "Identification Document",
+        "fechaNacimiento": "Birth date",
+        "nombre": "Name",
+        "primerApellido": "First Surname",
+        "segundoApellido": "Second Surname"
+    },
+
+    "menu": {
+        "opcionesMenu": "Menu options",
+        "listado": "List",
+        "usuarios": "Users",
+        "emplazamientos": "Sites",
+        "centros": "Centers",
+        "beneficiarios": "Beneficiaries",
+        "roles": "Roles",
+        "identificacion": "Applicant ID",
+        "fabricantes": "Manufacturers",
+        "modeloTarjeta": "Card Model",
+        "tipoTarjeta": "Type Card"
+    },
+
+    "alertas": {
+        "bienvenida": "Welcome back",
+        "loginIncorrecto": "Login error, check your credentials and try again",
+        "alertaEliminar": "Are you sure to delete the record?",
+        "alertaAviso": "Warning",
+        "regEliminado": "Record deleted successfully",
+        "regAniadido": "Record added successfully",
+        "regEditado": "Record edited successfully",
+        "codRequerido": "Code required",
+        "siConfirmacion": "Yes",
+        "noConfirmacion": "No",
+        "solicitudEnviada": "Request send successfully"
+    },
+
+    "error": {
+        "backend": {
+            "generico": "Something was wrong while processing the request. We apologize for the inconvenience.",
+            "conexion": {
+                "404": "The page you have requested is not available.",
+                "424": "Something was wrong while calling an external service. We apologize for the inconvenience.",
+                "500": "Something was wrong while requesting at the application server. We apologize for the inconvenience.",
+                "403": "You have no access to application.",
+                "401": "You are unauthorized to access to application.",
+                "generico": "Application's web server is not available."
+            },
+            "session": "You are unauthorized to access to application or your session is expired. You may login again."
+        }
+    },
+
+    "listado": {
+        "guardar": "Save",
+        "editar": "Edit",
+        "consultar": "Consult",
+        "eliminar": "Delete",
+        "roles": "Roles",
+        "enviar": "Send"
+    }
+}

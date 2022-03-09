@@ -1,0 +1,131 @@
+<div class="divMargenes" id="container">
+    <div class="p-col-2">
+        <button pButton type="button" id="btnAniadir" icon="pi pi-plus" label="{{'emplazamiento.AniadirEmplazamiento' | translate}}"
+            class="ui-button-raised ui-button-primary" (click)="add()"></button>
+    </div>
+    <div class="p-col right">
+        <p-button type="button" id="btnXLS" label="&nbsp;{{'XLS' | translate}}" icon="pi pi-download" title="{{'ExportXLS' | translate}}"
+            styleClass="ui-button-success" pRipple class="p-mb-2" (click)="exportarExcelEmplazamientos()"></p-button>
+    </div>
+    <div class="p-col right">
+        <p-button type="button" id="btnCSV" label="&nbsp;{{'CSV' | translate}}" icon="pi pi-download" title="{{'ExportCSV' | translate}}"
+            styleClass="ui-button-success" pRipple class="p-mb-2" (click)="exportarCsvEmplazamientos()"></p-button>
+    </div>
+</div>
+<div>
+    <p-table #dt [columns]="cols" [value]="emplazamientos" [paginator]="true" [rows]="10" dataKey="direccion"
+        [resizableColumns]="true" [reorderableColumns]="true">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="width:12em !important">{{'Acciones' | translate}}</th>
+            </tr>
+            <tr [style.fontSize.px]="fontSize">
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'descEmplazamiento', 'contains')" placeholder="Filtra por Nombre emplazamiento" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'direccion', 'contains')" placeholder="Filtra por Dirección" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'localidad', 'contains')" placeholder="Filtra por Localidad" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'cp', 'contains')" placeholder="Filtra por Código Postal" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'provincia', 'contains')" placeholder="Filtra por Provincia" class="ui-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'pais', 'contains')" placeholder="Filtra por País" class="ui-column-filter">
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td style="text-align:center">
+                    <p-button type="button" icon="pi pi-eye" styleClass="ui-button-raised ui-button-primary"
+                        (click)="consultar(rowData.idEmplazamiento)" title="{{'listado.consultar' | translate}}"></p-button>
+                    <p-button type="button" icon="pi pi-pencil" styleClass="ui-button-raised ui-button-primary"
+                        (click)="editar(rowData.idEmplazamiento)" title="{{'listado.editar' | translate}}"></p-button>
+                    <p-button type="button" icon="pi pi-trash" styleClass="ui-button-raised ui-button-primary"
+                        (click)="delete(rowData.idEmplazamiento)" title="{{'listado.eliminar' | translate}}"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog #cd header="{{'emplazamiento.EliminarEmplazamiento' | translate}}" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-check"
+            label="{{'alertas.siConfirmacion' | translate}}" (click)="cd.accept()"></p-button>
+        <p-button type="button" styleClass="ui-button-raised ui-button-primary" icon="pi pi-times"
+            label="{{'alertas.noConfirmacion' | translate}}" (click)="cd.reject()"></p-button>
+    </p-footer>
+</p-confirmDialog>
+<p-dialog header="{{ titleHeader }}" [(visible)]="displayDialog" [responsive]="true"
+    showEffect="fade" [modal]="true" [style]="{width: '500px'}">
+    <div class="ui-g ui-fluid" *ngIf="emplazamientosEdit">
+        <form [formGroup]="formulario" *ngIf="displayDialog">
+            <div class="p-col-12 p-grid p-justify-center">
+                <div class="p-col-12">
+                    <label for="descEmplazamiento">{{ 'emplazamiento.NombreEmplazamiento' | translate }} *</label>
+                    <input formControlName="descEmplazamiento" pInputText id="descEmplazamiento" maxlength="200" />
+                    <p-message severity="error" [text]="formulario.controls['descEmplazamiento'].errors['required'] ? ' El Nombre del emplazamiento es requerido': ''" *ngIf="!formulario.controls['descEmplazamiento'].valid&&formulario.controls['descEmplazamiento'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="direccion">{{ 'emplazamiento.Direccion' | translate }} *</label>
+                    <input formControlName="direccion" pInputText id="direccion" maxlength="300" />
+                    <p-message severity="error" [text]="formulario.controls['direccion'].errors['required'] ? ' La dirección es requerida': ''" *ngIf="!formulario.controls['direccion'].valid&&formulario.controls['direccion'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="localidad">{{ 'emplazamiento.Localidad' | translate }} *</label>
+                    <input formControlName="localidad" pInputText id="localidad" maxlength="200" />
+                    <p-message severity="error" [text]="formulario.controls['localidad'].errors['required'] ? ' La localidad es requerida': ''" *ngIf="!formulario.controls['localidad'].valid&&formulario.controls['localidad'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="cp">{{ 'emplazamiento.CP' | translate }}</label>
+                    <input (keydown)="isNumberKey($event)" formControlName="cp" pInputText id="cp" maxlength="5" />
+                </div>
+                <div class="p-col-12">
+                    <label for="provincia">{{ 'emplazamiento.Provincia' | translate }} *</label>
+                    <input formControlName="provincia" pInputText id="provincia" maxlength="100" />
+                    <p-message severity="error" [text]="formulario.controls['provincia'].errors['required'] ? ' La provincia es requerida': ''" *ngIf="!formulario.controls['provincia'].valid&&formulario.controls['provincia'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label for="pais">{{ 'emplazamiento.Pais' | translate }} *</label>
+                    <input formControlName="pais" pInputText id="pais" maxlength="80" />
+                    <p-message severity="error" [text]="formulario.controls['pais'].errors['required'] ? ' El País es requerido': ''" *ngIf="!formulario.controls['pais'].valid&&formulario.controls['pais'].dirty">
+                    </p-message>
+                </div>
+                <div class="p-col-12">
+                    <label style="margin-right: 2em;">{{ 'emplazamiento.Activo' | translate }} *</label>
+                    <label class="form-check-label" for="activoSi">{{ 'emplazamiento.siActivo' | translate }}</label>
+                    <input class="form-check-input" type="radio" formControlName="activo" [value]="1" required id="activoSi" />
+                    <label class="form-check-label" style="margin-left: 1.5em;" for="activoNo">{{ 'emplazamiento.noActivo' | translate }}</label>
+                    <input class="form-check-input" type="radio" formControlName="activo" [value]="0" required id="activoNo" />
+                </div>
+                <p-footer class="p-col-6">
+                    <div class="ui-dialog-buttonpane ui-helper-clearfix m-bottom m-top"><br>
+                        <div *ngIf="!edit;else editar"></div>
+                        <ng-template #editar>
+                            <button type="button" pButton icon="fa fa-check" class="ui-button-raised ui-button-primary"
+                                label="{{ 'listado.guardar' | translate }}" [disabled]="!formulario.valid" (click)="save()"></button>
+                        </ng-template>
+                    </div>
+                </p-footer>
+            </div>
+        </form>
+    </div>
+</p-dialog>
